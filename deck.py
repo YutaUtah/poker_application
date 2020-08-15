@@ -41,4 +41,4 @@ class Deck(object):
 
 
 deck = Deck(2)
-cards_left, draw_card = deck.draw_card(5)
+cards_left, draw_card = deck.draw_card(2)

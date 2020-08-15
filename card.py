@@ -18,5 +18,5 @@ class Card(object):
         return self.MARKS[self.mark] + str(self.VALUES[self.value-1])
 
 
-card = Card(1,2)
+card = Card(1,10)
 
