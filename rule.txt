@@ -23,8 +23,13 @@ Aを1, 11とし2つスコア計算できるように
 1回のプログラム実行でゲームを複数回できるように
 
 
+
+
 8/15
 repr: without parenthesis returns the string in __repr__ method
-
+    - repr method changes output form
 defining variable inside/outside of __init__ method
     https://stackoverflow.com/questions/1537202/difference-between-variables-inside-and-outside-of-init
+
+TROUBLE1:
+    all_cards instantiated variable returns object, and realized that __str__ should have been __repr__
