@@ -1,5 +1,7 @@
 class Card(object):
     """
+    attribute
+    ---------
     my_mark represents 4 card marks: spades, hearts, diamonds, and clubs
 
     card_value represents value of cards from ace(1) to king(13)
