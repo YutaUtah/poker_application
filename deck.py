@@ -17,12 +17,12 @@ class Deck(object):
 
         for deck in range(self.deck_num):
             for mark in range(0,len(Card.MARKS)):
-                for value in Card.VALUES:
+                for value in Card.NUMBERS:
                     self.all_cards.append(Card(mark, value))
 
         shuffle(self.all_cards)
 
-    def draw_card(self, draw_num):
+    def pick_card(self, draw_num):
         """
 
         :param draw_num:
@@ -39,6 +39,12 @@ class Deck(object):
         return self.all_cards, draw_card
 
 
+"""
+Deck(2) means that there are two decks and deck object is the aggragate of these
+card_left is the decks - draw_card
+"""
 
 deck = Deck(2)
-cards_left, draw_card = deck.draw_card(2)
+cards_left, draw_card = deck.pick_card(2)
+print(draw_card)
+print(cards_left)

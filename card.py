@@ -1,22 +1,62 @@
-class Card(object):
+class Card:
     """
-    attribute
-    ---------
-    my_mark represents 4 card marks: spades, hearts, diamonds, and clubs
+    mark and number input in Card
 
-    card_value represents value of cards from ace(1) to king(13)
+    Attributes
+    ----------
+    card_mark : int
+        mark（♠︎❤︎♦︎♣️）
+    card_number : int
+        card number
     """
 
-    MARKS = ["♠︎-", "❤︎-", "♦︎-", "♣️-"]
-    VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+    # Mark
+    MARKS = ("♠︎", "❤︎", "♦︎", "♣️")
+    # priority display
+    # ("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
+    RANKS = (*"A23456789", "10", *"JQK")
+    # priority number
+    NUMBERS = (range(1, 13 + 1))
+    # combine mark and number
+    NUMBER_TO_RANK = dict(zip(NUMBERS, RANKS))
 
-    def __init__(self, my_mark, my_value):
-        self.mark = my_mark
-        self.value = my_value
+    def __init__(self, card_mark, card_number):
+        """
+        Parameters
+        ----------
+        card_mark : int
+            mark（♠︎❤︎♦︎♣️）
+        card_number : int
+            number
+        """
+        self.mark = card_mark
+        self.number = card_number
+        self.rank = self.NUMBER_TO_RANK[self.number]
+        self.pair = f"{self.MARKS[self.mark]}-{self.rank}"
 
     def __repr__(self):
-        return self.MARKS[self.mark] + str(self.VALUES[self.value-1])
+        """
+        change instance input override
+
+        Returns
+        -------
+        combined mark and number str output
+
+        Examples
+        --------
+        >>> card = Card(2, 4)
+        >>> print(card)
+        ♦︎4
+        """
+        return self.pair
 
 
-card = Card(1,10)
+# Cardクラスからインスタンスを生成（引数にマークと数字）
+# reprメソッドで出力内容を変更しているので下記のように出力される
+# 通常 → <__main__.Card object at 0x10c949310>
+# reprメソッド追加 → ♦︎-4
 
+if __name__ == '__main__':
+    card = Card(2, 12)
+    print(card.number)
+    print(card.NUMBER_TO_RANK)
