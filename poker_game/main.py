@@ -12,7 +12,8 @@ def start_game():
     once the dealer stops drawining a card without the number going above 21,
     will check whether user or dealer has a closer number of sum to 21.
 
-    :return: None
+    Returns:
+        None
     """
     deck = Deck()
 
@@ -37,3 +38,106 @@ def start_game():
     results = check_who_wins(user_cards, dealer_cards)
 
     return results
+
+
+def draw_two_cards_from_deck(deck):
+    """
+    Draw two cards for users and dealers from deck object.
+
+    Write a description of this function in details.
+
+    Args:
+        deck: a card deck object
+
+    Returns:
+        two dictionaries with keys displayed and hidden
+    """
+    #TODO: Please write a logic
+
+    return user_cards, dealer_cards
+
+
+def display_cards(user_cards, dealer_cards):
+    """
+    Wriate a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        user_cards:
+        dealer_cards:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
+
+
+def user_decide_draw_cards():
+    """
+    Wriate a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        sample_arguments:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
+
+
+def check_the_sum():
+    """
+    Wriate a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        sample_arguments:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
+
+
+def deader_draw_cards():
+    """
+    Wriate a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        sample_arguments:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
+
+
+def check_who_wins():
+    """
+    Wriate a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        sample_arguments:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
