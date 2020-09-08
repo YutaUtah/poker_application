@@ -1,4 +1,4 @@
-from deck import Deck
+from poker_game.deck import Deck
 
 class Player:
     """
