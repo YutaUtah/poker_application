@@ -52,12 +52,6 @@ class Player:
         num : int, default 1
             カードをドローする回数
 
-        Examples
-        --------
-        >>> player.draw_card(deck, 2) # draw 2 cards [♠︎-J, ♠︎-10]
-        >>> player.draw_card(deck, 3) # [♦︎-9, ♣️-10, ♠︎-2]
-        >>> print(player.hands)
-        [♠︎-J, ♠︎-10, ♦︎-9, ♣️-10, ♠︎-2]
         """
         self.hands_store = deck.pick_card(num)
         self.hands.extend(self.hands_store)

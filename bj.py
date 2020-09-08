@@ -11,14 +11,5 @@ class BlackJack(object):
     VALUES = (values)
     RANK_TO_VALUES = dict(zip(RANKS, VALUES))
 
-    @classmethod
-    def calculate_current_score(cls, person):
-        person.current_score()
-        person.curent_sub_score()
-        person.has_A = False
-
-        for card in person.hands:
-            card_rank = str(card).split("-")[1]
-            card_value = cls.RANK_TO_VALUES[card_rank]
 
 
