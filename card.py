@@ -19,6 +19,8 @@ class Card:
     NUMBERS = (range(1, 13 + 1))
     # combine mark and number
     NUMBER_TO_RANK = dict(zip(NUMBERS, RANKS))
+    # {1: 'A', 2: '2', 3: '3', 4: '4', 5: '5', 6: '6',
+    #  7: '7', 8: '8', 9: '9', 10: '10', 11: 'J', 12: 'Q', 13: 'K'}
 
     def __init__(self, card_mark, card_number):
         """
@@ -51,12 +53,9 @@ class Card:
         return self.pair
 
 
-# Cardクラスからインスタンスを生成（引数にマークと数字）
-# reprメソッドで出力内容を変更しているので下記のように出力される
-# 通常 → <__main__.Card object at 0x10c949310>
-# reprメソッド追加 → ♦︎-4
+
 
 if __name__ == '__main__':
     card = Card(2, 12)
-    print(card.number)
-    print(card.NUMBER_TO_RANK)
+    print(card.rank)
+    print(card.pair)

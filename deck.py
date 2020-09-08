@@ -1,3 +1,4 @@
+# card class
 from card import Card
 
 from random import shuffle
@@ -28,15 +29,15 @@ class Deck(object):
         :param draw_num:
         :return: designated cards we drew, should return the list
         """
-        draw_card = []
+        self.draw_card = []
         if draw_num == 0:
             return self.all_cards
         else:
             for draw in range(draw_num):
-                draw_card.append(self.all_cards.pop())
+                self.draw_card.append(self.all_cards.pop())
 
 
-        return self.all_cards, draw_card
+        return self.draw_card
 
 
 """
@@ -44,7 +45,10 @@ Deck(2) means that there are two decks and deck object is the aggragate of these
 card_left is the decks - draw_card
 """
 
-deck = Deck(2)
-cards_left, draw_card = deck.pick_card(2)
-print(draw_card)
-print(cards_left)
+
+
+if __name__ == "__main__":
+    deck = Deck(2)
+    print(deck.pick_card(5))
+
+
