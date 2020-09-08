@@ -1,3 +1,5 @@
+from poker_game.deck import Deck
+
 def start_game():
     """
     Start a poker game.
@@ -20,8 +22,8 @@ def start_game():
     user_cards, dealer_cards = draw_two_cards_from_deck(deck)
 
     # Examples:
-    user_cards = {"displayed":[6, 11], "hidden": []}
-    dealer_cards = {"displayed":[8], "hidden": [12]}
+    # user_cards = {"displayed":[6, 11], "hidden": []}
+    # dealer_cards = {"displayed":[8], "hidden": [12]}
 
     display_cards(user_cards, dealer_cards)
 
@@ -53,6 +55,13 @@ def draw_two_cards_from_deck(deck):
         two dictionaries with keys displayed and hidden
     """
     #TODO: Please write a logic
+    user_cards = {"displayed":[], "hidden": []}
+    dealer_cards = {"displayed": [], "hidden": []}
+
+    user_cards["displayed"].append(deck.draw_a_card())
+    dealer_cards["displayed"].append(deck.draw_a_card())
+    user_cards["displayed"].append(deck.draw_a_card())
+    dealer_cards["hidden"].append(deck.draw_a_card())
 
     return user_cards, dealer_cards
 
