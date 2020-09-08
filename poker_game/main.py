@@ -46,7 +46,11 @@ def draw_two_cards_from_deck(deck):
     """
     Draw two cards for users and dealers from deck object.
 
-    Write a description of this function in details.
+    Create two empty dictionarys with a key displayed and hidden,
+    call a function draw_a_card() from Deck objects,
+    assign two cards to displayed in user_cards,
+    assign one card to displayed and one card to hidden in dealer_cards,
+    return these dictionaries.
 
     Args:
         deck: a card deck object
