@@ -2,6 +2,7 @@
 # このimportこの書き方でいいかな
 from deck import Deck
 
+# todo: why does display_cards does not work if i use this function above the function?
 
 def start_game():
     """
@@ -30,6 +31,7 @@ def start_game():
     dealer_cards = {"displayed":[8], "hidden": [12]}
     """
     a, b = display_cards(user_cards, dealer_cards)
+
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
 
