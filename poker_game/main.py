@@ -1,3 +1,8 @@
+#todo:
+# このimportこの書き方でいいかな
+from deck import Deck
+
+
 def start_game():
     """
     Start a poker game.
@@ -16,14 +21,18 @@ def start_game():
         None
     """
     deck = Deck()
+    user_cards = deck.pick_card(2)
+    dealer_cards = deck.pick_card(2)
 
-    user_cards, dealer_cards = draw_two_cards_from_deck(deck)
-
-    # Examples:
+    """
+    Examples:
     user_cards = {"displayed":[6, 11], "hidden": []}
     dealer_cards = {"displayed":[8], "hidden": [12]}
+    """
+    a, b = display_cards(user_cards, dealer_cards)
+    # todo: without return value on this function, how does it work?
+    # display_cards(user_cards, dealer_cards)
 
-    display_cards(user_cards, dealer_cards)
 
     user_cards = user_decide_draw_cards(user_cards, deck)
 
@@ -40,21 +49,21 @@ def start_game():
     return results
 
 
-def draw_two_cards_from_deck(deck):
-    """
-    Draw two cards for users and dealers from deck object.
-
-    Write a description of this function in details.
-
-    Args:
-        deck: a card deck object
-
-    Returns:
-        two dictionaries with keys displayed and hidden
-    """
-    #TODO: Please write a logic
-
-    return user_cards, dealer_cards
+# def draw_two_cards_from_deck(deck):
+#     """
+#     Draw two cards for users and dealers from deck object.
+#
+#     Write a description of this function in details.
+#
+#     Args:
+#         deck: a card deck object
+#
+#     Returns:
+#         two dictionaries with keys displayed and hidden
+#     """
+#     #TODO: Please write a logic
+#
+#     return user_cards, dealer_cards
 
 
 def display_cards(user_cards, dealer_cards):
@@ -71,8 +80,14 @@ def display_cards(user_cards, dealer_cards):
         None
     """
     # TODO: Please write a logic
+    keyDict_user = {"displayed", "hidden"}
+    keyDict_dealer = {"displayed", "hidden"}
+    game_card_user = dict([(key, []) for key in keyDict_user])
+    game_card_dealer = dict([(key, []) for key in keyDict_dealer])
+    game_card_user["displayed"] = user_cards
+    game_card_dealer["displayed"], game_card_dealer["hidden"] = dealer_cards[0], dealer_cards[1]
 
-    return None
+    return game_card_user, game_card_dealer
 
 
 def user_decide_draw_cards():
@@ -141,3 +156,4 @@ def check_who_wins():
     # TODO: Please write a logic
 
     return None
+

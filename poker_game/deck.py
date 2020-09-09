@@ -1,5 +1,5 @@
 # card class
-from poker_game.card import Card
+from card import Card
 
 from random import shuffle
 
