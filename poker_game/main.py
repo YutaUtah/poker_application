@@ -1,6 +1,6 @@
 #todo:
 # このimportこの書き方でいいかな
-from deck import Deck
+from poker_game.deck import Deck
 
 # todo: why does display_cards does not work if i use this function above the function?
 
@@ -36,19 +36,19 @@ def start_game():
     # display_cards(user_cards, dealer_cards)
 
 
-    user_cards = user_decide_draw_cards(user_cards, deck)
+    # user_cards = user_decide_draw_cards(user_cards, deck)
 
-    if check_the_sum(user_cards) > 21:
-        return 0
-
-    dealer_cards = deader_draw_cards(dealer_cards, deck)
-
-    if check_the_sum(dealer_cards) > 21:
-        return 1
-
-    results = check_who_wins(user_cards, dealer_cards)
-
-    return results
+    # if check_the_sum(user_cards) > 21:
+    #     return 0
+    #
+    # dealer_cards = deader_draw_cards(dealer_cards, deck)
+    #
+    # if check_the_sum(dealer_cards) > 21:
+    #     return 1
+    #
+    # results = check_who_wins(user_cards, dealer_cards)
+    #
+    # return results
 
 
 # def draw_two_cards_from_deck(deck):
