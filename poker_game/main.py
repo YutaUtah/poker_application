@@ -1,8 +1,11 @@
-#todo:
-# このimportこの書き方でいいかな
-from poker_game.deck import Deck
+from deck import Deck
+from card import Card
+
 
 # todo: why does display_cards does not work if i use this function above the function?
+
+
+
 
 def start_game():
     """
@@ -22,6 +25,7 @@ def start_game():
         None
     """
     deck = Deck()
+
     user_cards = deck.pick_card(2)
     dealer_cards = deck.pick_card(2)
 
@@ -30,13 +34,20 @@ def start_game():
     user_cards = {"displayed":[6, 11], "hidden": []}
     dealer_cards = {"displayed":[8], "hidden": [12]}
     """
-    a, b = display_cards(user_cards, dealer_cards)
 
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
-
-
     # user_cards = user_decide_draw_cards(user_cards, deck)
+
+    user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
+    user_cards = user_decide_draw_cards(user_cards, deck)
+    user_card_sum = check_the_sum(user_cards, dealer_cards, Card)
+
+
+
+
+
+
 
     # if check_the_sum(user_cards) > 21:
     #     return 0
@@ -89,12 +100,18 @@ def display_cards(user_cards, dealer_cards):
     game_card_user["displayed"] = user_cards
     game_card_dealer["displayed"], game_card_dealer["hidden"] = dealer_cards[0], dealer_cards[1]
 
+    print("Your cards:")
+    print(game_card_user["displayed"])
+
+    print("Dealer card: ")
+    print(game_card_dealer["displayed"])
+
     return game_card_user, game_card_dealer
 
 
-def user_decide_draw_cards():
+def user_decide_draw_cards(game_card_user, deck):
     """
-    Wriate a short summary of this function
+    Write a short summary of this function
 
     Write a description of this function in details.
 
@@ -106,10 +123,26 @@ def user_decide_draw_cards():
     """
     # TODO: Please write a logic
 
-    return None
+    decided = False
+    while decided is False:
+        draw_or_not = input("You have 2 cards {}. Do you want to draw 1 more card? [y/n] \n".format(game_card_user["displayed"]))
+
+        if draw_or_not == 'y':
+            user_next_card = deck.pick_card(1)
+            game_card_user["displayed"].append(user_next_card[0])
+            decided = True
+        elif draw_or_not == 'n':
+            decided = True
+            pass
+        else:
+            print("Please input appropriate answer!")
+
+    print("your current cards are {}".format(game_card_user["displayed"]))
+
+    return game_card_user
 
 
-def check_the_sum():
+def check_the_sum(user_cards, dealer_cards, card):
     """
     Wriate a short summary of this function
 
@@ -121,14 +154,18 @@ def check_the_sum():
     Returns:
         None
     """
-    # TODO: Please write a logic
+    # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
-    return None
+    user_card_sum = 0
+    for card in user_cards["displayed"]:
+        user_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
+
+    return user_card_sum
 
 
 def deader_draw_cards():
     """
-    Wriate a short summary of this function
+    Write a short summary of this function
 
     Write a description of this function in details.
 
@@ -159,3 +196,5 @@ def check_who_wins():
 
     return None
 
+if __name__ == "__main__":
+    start_game()

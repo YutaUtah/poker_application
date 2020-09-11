@@ -49,6 +49,6 @@ card_left is the decks - draw_card
 
 if __name__ == "__main__":
     deck = Deck(2)
-    print(deck.pick_card(5))
+    # print(deck.pick_card(5))
 
 
