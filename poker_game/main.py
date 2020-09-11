@@ -37,7 +37,7 @@ def start_game():
 
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
-    # user_cards = user_decide_draw_cards(user_cards, deck)
+
 
     user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
     user_cards = user_decide_draw_cards(user_cards, deck)
@@ -63,21 +63,6 @@ def start_game():
     # return results
 
 
-# def draw_two_cards_from_deck(deck):
-#     """
-#     Draw two cards for users and dealers from deck object.
-#
-#     Write a description of this function in details.
-#
-#     Args:
-#         deck: a card deck object
-#
-#     Returns:
-#         two dictionaries with keys displayed and hidden
-#     """
-#     #TODO: Please write a logic
-#
-#     return user_cards, dealer_cards
 
 
 def display_cards(user_cards, dealer_cards):
