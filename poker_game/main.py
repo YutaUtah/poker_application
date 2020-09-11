@@ -41,7 +41,8 @@ def start_game():
 
     user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
     user_cards = user_decide_draw_cards(user_cards, deck)
-    user_card_sum = check_the_sum(user_cards, dealer_cards, Card)
+    a = dealer_draw_cards(dealer_cards, deck)
+    user_card_sum = check_the_sum(user_cards, dealer_cards, deck)
 
 
 
@@ -98,7 +99,7 @@ def display_cards(user_cards, dealer_cards):
     game_card_user = dict([(key, []) for key in keyDict_user])
     game_card_dealer = dict([(key, []) for key in keyDict_dealer])
     game_card_user["displayed"] = user_cards
-    game_card_dealer["displayed"], game_card_dealer["hidden"] = dealer_cards[0], dealer_cards[1]
+    game_card_dealer["displayed"], game_card_dealer["hidden"] = [dealer_cards[0]], [dealer_cards[1]]
 
     print("Your cards:")
     print(game_card_user["displayed"])
@@ -116,10 +117,11 @@ def user_decide_draw_cards(game_card_user, deck):
     Write a description of this function in details.
 
     Args:
-        sample_arguments:
+        game_card_user:
+        deck:
 
     Returns:
-        None
+        game_card_user
     """
     # TODO: Please write a logic
 
@@ -139,17 +141,21 @@ def user_decide_draw_cards(game_card_user, deck):
 
     print("your current cards are {}".format(game_card_user["displayed"]))
 
+
+
     return game_card_user
 
 
-def check_the_sum(user_cards, dealer_cards, card):
+def check_the_sum(user_cards, dealer_cards, deck):
     """
     Wriate a short summary of this function
 
     Write a description of this function in details.
 
     Args:
-        sample_arguments:
+        user_cards:
+        dealer_cards:
+        deck:
 
     Returns:
         None
@@ -160,24 +166,12 @@ def check_the_sum(user_cards, dealer_cards, card):
     for card in user_cards["displayed"]:
         user_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
 
+    # dealer draws a card if their sum is under 17
+    dealer_cards_list = []
+    for status in ("hidden", "displayed"):
+        dealer_cards_list.append(dealer_cards[status])
+
     return user_card_sum
-
-
-def deader_draw_cards():
-    """
-    Write a short summary of this function
-
-    Write a description of this function in details.
-
-    Args:
-        sample_arguments:
-
-    Returns:
-        None
-    """
-    # TODO: Please write a logic
-
-    return None
 
 
 def check_who_wins():
@@ -195,6 +189,40 @@ def check_who_wins():
     # TODO: Please write a logic
 
     return None
+
+
+def dealer_draw_cards(dealer_cards, deck):
+    """
+    Write a short summary of this function
+
+    Write a description of this function in details.
+
+    Args:
+        sample_arguments:
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic ここからね
+    # dealer draws a card if their sum is under 17
+    dealer_cards_list = []
+    dealer_card_sum = 0
+    for status in ("hidden", "displayed"):
+        dealer_cards_list.append(dealer_cards[status])
+
+    for card in dealer_cards_list:
+        dealer_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
+
+    if dealer_card_sum <17:
+        card_picked = deck.pick_card(1)
+        print(card_picked)
+        # dealer_cards["hidden"] = card_picked
+        # dealer_cards.update(hidden=card_picked)
+        dealer_cards["hidden"].append(card_picked)
+    else:
+        pass
+
+    return dealer_cards
 
 if __name__ == "__main__":
     start_game()
