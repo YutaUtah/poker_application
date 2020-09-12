@@ -42,20 +42,9 @@ def start_game():
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
 
-    list = check_the_sum(user_cards, dealer_cards)
-    print(list)
-    # if check_the_sum(user_cards) > 21:
-    #     return 0
 
 
 
-
-
-
-
-    # if check_the_sum(user_cards) > 21:
-    #     return 0
-    #
     # dealer_cards = deader_draw_cards(dealer_cards, deck)
     #
     # if check_the_sum(dealer_cards) > 21:
@@ -113,17 +102,23 @@ def user_decide_draw_cards(game_card_user, deck):
     """
     # TODO: Please write a logic
 
-    decided = False
-    while decided is False:
+    decided = True
+    while decided:
         draw_or_not = input("You have 2 cards {}. Do you want to draw 1 more card? [y/n] \n".format(game_card_user["displayed"]))
 
         if draw_or_not == 'y':
             user_next_card = deck.pick_card(1)
             game_card_user["displayed"].append(user_next_card[0])
-            decided = True
-        elif draw_or_not == 'n':
-            decided = True
+            print("your current cards are {}".format(game_card_user["displayed"]))
+            if check_the_sum(game_card_user) > 21:
+                print("Your cards is over 21, You lose!")
+                #todo: ここから見る if its over 21 what do we need to do?
+                result = 0
+                break
             pass
+
+        elif draw_or_not == 'n':
+            break
         else:
             print("Please input appropriate answer!")
 
@@ -132,7 +127,7 @@ def user_decide_draw_cards(game_card_user, deck):
     return game_card_user
 
 
-def check_the_sum(user_cards, dealer_cards):
+def check_the_sum(player_cards):
     """
     Wriate a short summary of this function
 
@@ -150,14 +145,12 @@ def check_the_sum(user_cards, dealer_cards):
 
     cards_sum = 0
     sum_list = []
-    for which_cards in (user_cards, dealer_cards):
-        for status in ("hidden", "displayed"):
-            for card_idx in range(len(which_cards[status])):
-                cards_sum += Card.RANK_TO_NUMBER[str(which_cards[status][card_idx]).split("-")[1]]
-        sum_list.append(cards_sum)
-        cards_sum = 0
 
-    return sum_list
+    for status in ("hidden", "displayed"):
+        for card_idx in range(len([status])):
+            cards_sum += Card.RANK_TO_NUMBER[str(player_cards[status][card_idx]).split("-")[1]]
+
+    return cards_sum
 
 
 def dealer_draw_cards(dealer_cards, deck):
