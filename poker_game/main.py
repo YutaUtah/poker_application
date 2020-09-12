@@ -16,7 +16,7 @@ def start_game():
     as long as the sum is less than 21, the choice to take another card will be provided,
     once the user choose not to draw a card, the dealer will draw a card as long as the sum is less than 18,
     if the sum of number of dealer cards goes above 21, the user will win,
-    once the dealer stops drawining a card without the number going above 21,
+    once the dealer stops drawing a card without the number going above 21,
     will check whether user or dealer has a closer number of sum to 21.
 
     Returns:
@@ -42,20 +42,6 @@ def start_game():
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
     check_who_wins(user_cards, dealer_cards)
-
-
-
-
-    # dealer_cards = deader_draw_cards(dealer_cards, deck)
-    #
-    # if check_the_sum(dealer_cards) > 21:
-    #     return 1
-    #
-    # results = check_who_wins(user_cards, dealer_cards)
-    #
-    # return results
-
-
 
 
 def display_cards(user_cards, dealer_cards):
@@ -90,9 +76,9 @@ def display_cards(user_cards, dealer_cards):
 
 def user_decide_draw_cards(game_card_user, deck):
     """
-    Write a short summary of this function
-
-    Write a description of this function in details.
+    Shows user's cards first, ask if they want to draw 1 more card
+    Keep doing this until they choose not to draw
+    If user's cards sum is over 21, quit the application and the user will lose
 
     Args:
         game_card_user:
@@ -113,11 +99,8 @@ def user_decide_draw_cards(game_card_user, deck):
             print("your current cards are {}".format(game_card_user["displayed"]))
             if check_the_sum(game_card_user) > 21:
                 print("Your cards is over 21, You lose!")
-                #todo: ここから見る if its over 21 what do we need to do?
                 quit()
-                break
             pass
-
         elif draw_or_not == 'n':
             break
         else:
@@ -130,9 +113,7 @@ def user_decide_draw_cards(game_card_user, deck):
 
 def check_the_sum(player_cards):
     """
-    Wriate a short summary of this function
-
-    Write a description of this function in details.
+    Check the sum of given player's cards
 
     Args:
         user_cards:
@@ -140,7 +121,7 @@ def check_the_sum(player_cards):
         deck:
 
     Returns:
-        None
+        cards_sum
     """
     # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
@@ -156,7 +137,6 @@ def check_the_sum(player_cards):
 
 def dealer_draw_cards(dealer_cards, deck):
     """
-    Write a short summary of this function
     If dealer's 2 cards sum is less than 17, 1 more card will be added to their "hidden" card stack
 
     Args:
