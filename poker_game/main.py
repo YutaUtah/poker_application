@@ -126,8 +126,6 @@ def user_decide_draw_cards(game_card_user, deck):
 
     print("your current cards are {}".format(game_card_user["displayed"]))
 
-
-
     return game_card_user
 
 
@@ -179,33 +177,28 @@ def check_who_wins():
 def dealer_draw_cards(dealer_cards, deck):
     """
     Write a short summary of this function
-
-    Write a description of this function in details.
+    If dealer's 2 cards sum is less than 17, 1 more card will be added to their "hidden" card stack
 
     Args:
-        sample_arguments:
+        dealer_cards:
+        deck:
 
     Returns:
-        None
+        dealer_cards
     """
-    # TODO: Please write a logic ここからね
-    # dealer draws a card if their sum is under 17
-    dealer_cards_list = []
-    dealer_card_sum = 0
-    for status in ("hidden", "displayed"):
-        dealer_cards_list.append(dealer_cards[status])
 
-    for card in dealer_cards_list:
-        dealer_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
+    dealer_card_sum = 0
+
+    for status in ("hidden", "displayed"):
+        for card_idx in range(len(dealer_cards[status])):
+            dealer_card_sum += Card.RANK_TO_NUMBER[str(dealer_cards[status][card_idx]).split("-")[1]]
 
     if dealer_card_sum <17:
         card_picked = deck.pick_card(1)
-        print(card_picked)
-        # dealer_cards["hidden"] = card_picked
-        # dealer_cards.update(hidden=card_picked)
-        dealer_cards["hidden"].append(card_picked)
+        dealer_cards["hidden"].append(card_picked[0])
     else:
-        pass
+        return dealer_cards
+
 
     return dealer_cards
 
