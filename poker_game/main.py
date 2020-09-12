@@ -46,7 +46,7 @@ def start_game():
 
 def display_cards(user_cards, dealer_cards):
     """
-    Wriate a short summary of this function
+    Write a short summary of this function
 
     Write a description of this function in details.
 
@@ -55,7 +55,7 @@ def display_cards(user_cards, dealer_cards):
         dealer_cards:
 
     Returns:
-        None
+        user_cards, dealer_cards
     """
     # TODO: Please write a logic
     keyDict_user = {"displayed", "hidden"}
@@ -68,7 +68,7 @@ def display_cards(user_cards, dealer_cards):
     print("Your cards:")
     print(game_card_user["displayed"])
 
-    print("Dealer card: ")
+    print("Dealer's displayed card: ")
     print(game_card_dealer["displayed"])
 
     return game_card_user, game_card_dealer
