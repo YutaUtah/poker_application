@@ -1,6 +1,7 @@
 from poker_game.deck import Deck
 from poker_game.card import Card
 
+import sys
 
 def start_game():
     """
@@ -24,6 +25,8 @@ def start_game():
     # Initial setting: both user and dealer draw 2 cards
     user_cards = deck.pick_card(2)
     dealer_cards = deck.pick_card(2)
+    global game_over
+    game_over = False
 
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
@@ -36,10 +39,13 @@ def start_game():
     user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
     # User could choose whether or not they pick additional card
     user_cards = user_decide_draw_cards(user_cards, deck)
+    if check_the_sum(user_cards) > 21:
+        return None
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
     check_who_wins(user_cards, dealer_cards)
 
+    return None
 
 def display_cards(user_cards, dealer_cards):
     """
@@ -82,7 +88,6 @@ def user_decide_draw_cards(game_card_user, deck):
     Returns:
         game_card_user
     """
-    # TODO: Please write a logic
 
     decided = True
     while decided:
@@ -95,7 +100,7 @@ def user_decide_draw_cards(game_card_user, deck):
             print("your current cards are {}".format(', '.join(str(x) for x in game_card_user["displayed"])))
             if check_the_sum(game_card_user) > 21:
                 print("Your cards is over 21, You lose!")
-                quit()
+                break
             pass
         elif draw_or_not == 'n':
             break
@@ -179,4 +184,6 @@ def check_who_wins(user_cards, dealer_cards):
     return None
 
 if __name__ == "__main__":
+    start_game()
+    print("Next")
     start_game()
