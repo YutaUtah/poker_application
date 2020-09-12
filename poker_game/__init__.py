@@ -1,4 +1,4 @@
 from poker_game import main
 
-# main.start_game()
+main.start_game()
 
