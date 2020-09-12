@@ -41,6 +41,7 @@ def start_game():
     user_cards = user_decide_draw_cards(user_cards, deck)
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
+    check_who_wins(user_cards, dealer_cards)
 
 
 
@@ -113,7 +114,7 @@ def user_decide_draw_cards(game_card_user, deck):
             if check_the_sum(game_card_user) > 21:
                 print("Your cards is over 21, You lose!")
                 #todo: ここから見る if its over 21 what do we need to do?
-                result = 0
+                quit()
                 break
             pass
 
@@ -147,7 +148,7 @@ def check_the_sum(player_cards):
     sum_list = []
 
     for status in ("hidden", "displayed"):
-        for card_idx in range(len([status])):
+        for card_idx in range(len(player_cards[status])):
             cards_sum += Card.RANK_TO_NUMBER[str(player_cards[status][card_idx]).split("-")[1]]
 
     return cards_sum
@@ -194,6 +195,13 @@ def check_who_wins(user_cards, dealer_cards):
         None
     """
     # TODO: Please write a logic
+
+    if check_the_sum(user_cards) > check_the_sum(dealer_cards):
+        print("You win {}!".format(user_cards))
+    elif check_the_sum(user_cards) < check_the_sum(dealer_cards):
+        print("Dealer win {}!".format(dealer_cards))
+    elif check_the_sum(user_cards) == check_the_sum(dealer_cards):
+        print("You guys tied {} {}!".format(user_cards, dealer_cards))
 
     return None
 
