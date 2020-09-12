@@ -115,9 +115,7 @@ def check_the_sum(player_cards):
     Check the sum of given player's cards
 
     Args:
-        user_cards:
-        dealer_cards:
-        deck:
+        player_cards:
 
     Returns:
         cards_sum
