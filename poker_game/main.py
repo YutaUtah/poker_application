@@ -42,8 +42,10 @@ def start_game():
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
 
-    if check_the_sum(user_cards) > 21:
-        return 0
+    list = check_the_sum(user_cards, dealer_cards)
+    print(list)
+    # if check_the_sum(user_cards) > 21:
+    #     return 0
 
 
 
@@ -130,7 +132,7 @@ def user_decide_draw_cards(game_card_user, deck):
     return game_card_user
 
 
-def check_the_sum(user_cards):
+def check_the_sum(user_cards, dealer_cards):
     """
     Wriate a short summary of this function
 
@@ -146,11 +148,16 @@ def check_the_sum(user_cards):
     """
     # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
-    user_card_sum = 0
-    for card in user_cards["displayed"]:
-        user_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
+    cards_sum = 0
+    sum_list = []
+    for which_cards in (user_cards, dealer_cards):
+        for status in ("hidden", "displayed"):
+            for card_idx in range(len(which_cards[status])):
+                cards_sum += Card.RANK_TO_NUMBER[str(which_cards[status][card_idx]).split("-")[1]]
+        sum_list.append(cards_sum)
+        cards_sum = 0
 
-    return user_card_sum
+    return sum_list
 
 
 def dealer_draw_cards(dealer_cards, deck):
