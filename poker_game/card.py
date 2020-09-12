@@ -57,7 +57,3 @@ class Card:
 
 
 
-if __name__ == '__main__':
-    card = Card(2, 12)
-    print(card.rank)
-    print(card.pair)
