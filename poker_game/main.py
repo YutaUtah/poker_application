@@ -2,9 +2,6 @@ from poker_game.deck import Deck
 from poker_game.card import Card
 
 
-# todo: why does display_cards does not work if i use this function above the function?
-
-
 def start_game():
     """
     Start a poker game.
