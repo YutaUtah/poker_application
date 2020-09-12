@@ -46,9 +46,8 @@ def start_game():
 
 def display_cards(user_cards, dealer_cards):
     """
-    Write a short summary of this function
-
-    Write a description of this function in details.
+    Display the cards in "displayed" and "hidden"
+    Dealer is only able to display 1 card
 
     Args:
         user_cards:
@@ -106,7 +105,7 @@ def user_decide_draw_cards(game_card_user, deck):
         else:
             print("Please input appropriate answer!")
 
-    print("your current cards are {}".format(game_card_user["displayed"]))
+    print("Your current cards are {}".format(game_card_user["displayed"]))
 
     return game_card_user
 
@@ -170,7 +169,6 @@ def check_who_wins(user_cards, dealer_cards):
         user_cards:
         dealer_cards:
 
-
     Returns:
         None
     """
@@ -178,9 +176,9 @@ def check_who_wins(user_cards, dealer_cards):
     if check_the_sum(dealer_cards) > 21:
         print("You win {}!".format(user_cards))
     elif check_the_sum(user_cards) > check_the_sum(dealer_cards):
-        print("You win {}!".format(user_cards))
+        print("You wins {}!".format(user_cards))
     elif check_the_sum(user_cards) < check_the_sum(dealer_cards):
-        print("Dealer win {}!".format(dealer_cards))
+        print("Dealer wins {}!".format(dealer_cards))
     elif check_the_sum(user_cards) == check_the_sum(dealer_cards):
         print("You guys tied {} {}!".format(user_cards, dealer_cards))
 
