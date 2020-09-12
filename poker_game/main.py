@@ -172,7 +172,6 @@ def check_who_wins(user_cards, dealer_cards):
     Returns:
         None
     """
-    # TODO: Please write a logic
     if check_the_sum(dealer_cards) > 21:
         print("You win {}!".format(user_cards))
     elif check_the_sum(user_cards) > check_the_sum(dealer_cards):
