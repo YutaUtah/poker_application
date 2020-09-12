@@ -16,7 +16,8 @@ class Card:
     # ("A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K")
     RANKS = (*"A23456789", "10", *"JQK")
     # priority number
-    NUMBERS = (range(1, 13 + 1))
+    NUMBERS = list(range(1,11))
+    NUMBERS.extend([10, 10, 10])
     # combine mark and number
     NUMBER_TO_RANK = dict(zip(NUMBERS, RANKS))
     RANK_TO_NUMBER = dict(zip(RANKS, NUMBERS))
