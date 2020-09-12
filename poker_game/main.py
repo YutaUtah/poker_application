@@ -62,10 +62,9 @@ def display_cards(user_cards, dealer_cards):
     game_card_dealer["displayed"], game_card_dealer["hidden"] = [dealer_cards[0]], [dealer_cards[1]]
 
     print("Your cards:")
-    print(game_card_user["displayed"])
-
+    print(*game_card_user["displayed"], sep=' ')
     print("Dealer's displayed card: ")
-    print(game_card_dealer["displayed"])
+    print(*game_card_dealer["displayed"], sep=' ')
 
     return game_card_user, game_card_dealer
 
@@ -87,12 +86,12 @@ def user_decide_draw_cards(game_card_user, deck):
 
     decided = True
     while decided:
-        draw_or_not = input("You have 2 cards {}. Do you want to draw 1 more card? [y/n] \n".format(game_card_user["displayed"]))
+        draw_or_not = input("You have 2 cards {}. Do you want to draw 1 more card? [y/n] \n".format(', '.join(str(x) for x in game_card_user["displayed"])))
 
         if draw_or_not == 'y':
             user_next_card = deck.pick_card(1)
             game_card_user["displayed"].append(user_next_card[0])
-            print("your current cards are {}".format(game_card_user["displayed"]))
+            print("your current cards are {}".format(', '.join(str(x) for x in game_card_user["displayed"])))
             if check_the_sum(game_card_user) > 21:
                 print("Your cards is over 21, You lose!")
                 quit()
@@ -102,7 +101,7 @@ def user_decide_draw_cards(game_card_user, deck):
         else:
             print("Please input appropriate answer!")
 
-    print("Your current cards are {}".format(game_card_user["displayed"]))
+    # print("Your current cards are {}".format(', '.join(str(x) for x in game_card_user["displayed"])))
 
     return game_card_user
 
@@ -167,13 +166,14 @@ def check_who_wins(user_cards, dealer_cards):
         None
     """
     if check_the_sum(dealer_cards) > 21:
-        print("You win {}!".format(user_cards))
+        print("You win {}!".format(', '.join(str(x) for x in user_cards["displayed"])))
     elif check_the_sum(user_cards) > check_the_sum(dealer_cards):
-        print("You wins {}!".format(user_cards))
+        print("You win {}!".format(', '.join(str(x) for x in user_cards["displayed"])))
     elif check_the_sum(user_cards) < check_the_sum(dealer_cards):
-        print("Dealer wins {}!".format(dealer_cards))
+        print("Dealer wins {}!".format(', '.join(str(x) for status in ("hidden", "displayed") for x in dealer_cards[status])))
     elif check_the_sum(user_cards) == check_the_sum(dealer_cards):
-        print("You guys tied {} {}!".format(user_cards, dealer_cards))
+        print("You guys tied {} {}!".format(', '.join(str(x) for x in user_cards["displayed"]),
+                                            ', '.join(str(x) for status in ("hidden", "displayed") for x in dealer_cards[status])))
 
     return None
 
