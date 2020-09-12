@@ -184,6 +184,13 @@ def check_who_wins(user_cards, dealer_cards):
     return None
 
 if __name__ == "__main__":
-    start_game()
-    print("Next")
-    start_game()
+    game_counter = 1
+    print("\n***********************************  Game {}  ***********************************\n".format(game_counter))
+    while True:
+        start_game()
+        user_decision = input("\nDo you want to continue? [y/n]\n")
+        if user_decision == 'n':
+            print("\nThank you for playing our BlackJack!!")
+            break
+        game_counter += 1
+        print("\n***********************************  Game {}  ***********************************\n".format(game_counter))
