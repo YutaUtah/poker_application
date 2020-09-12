@@ -120,7 +120,6 @@ def check_the_sum(player_cards):
     # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
     cards_sum = 0
-    sum_list = []
 
     for status in ("hidden", "displayed"):
         for card_idx in range(len(player_cards[status])):
