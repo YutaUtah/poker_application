@@ -5,8 +5,6 @@ from card import Card
 # todo: why does display_cards does not work if i use this function above the function?
 
 
-
-
 def start_game():
     """
     Start a poker game.
@@ -24,25 +22,28 @@ def start_game():
     Returns:
         None
     """
+    # Instantiate the Deck object from deck.py
     deck = Deck()
-
+    # Initial setting: both user and dealer draw 2 cards
     user_cards = deck.pick_card(2)
     dealer_cards = deck.pick_card(2)
+
+    # todo: without return value on this function, how does it work?
+    # display_cards(user_cards, dealer_cards)
 
     """
     Examples:
     user_cards = {"displayed":[6, 11], "hidden": []}
     dealer_cards = {"displayed":[8], "hidden": [12]}
     """
-
-    # todo: without return value on this function, how does it work?
-    # display_cards(user_cards, dealer_cards)
-
-
     user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
+    # User could choose whether or not they pick additional card
     user_cards = user_decide_draw_cards(user_cards, deck)
-    a = dealer_draw_cards(dealer_cards, deck)
-    user_card_sum = check_the_sum(user_cards, dealer_cards, deck)
+    # Dealer needs to pick additional card if their remaining sum is under 17
+    dealer_cards = dealer_draw_cards(dealer_cards, deck)
+
+    if check_the_sum(user_cards) > 21:
+        return 0
 
 
 
@@ -129,7 +130,7 @@ def user_decide_draw_cards(game_card_user, deck):
     return game_card_user
 
 
-def check_the_sum(user_cards, dealer_cards, deck):
+def check_the_sum(user_cards):
     """
     Wriate a short summary of this function
 
@@ -149,29 +150,7 @@ def check_the_sum(user_cards, dealer_cards, deck):
     for card in user_cards["displayed"]:
         user_card_sum += Card.RANK_TO_NUMBER[str(card).split("-")[1]]
 
-    # dealer draws a card if their sum is under 17
-    dealer_cards_list = []
-    for status in ("hidden", "displayed"):
-        dealer_cards_list.append(dealer_cards[status])
-
     return user_card_sum
-
-
-def check_who_wins():
-    """
-    Wriate a short summary of this function
-
-    Write a description of this function in details.
-
-    Args:
-        sample_arguments:
-
-    Returns:
-        None
-    """
-    # TODO: Please write a logic
-
-    return None
 
 
 def dealer_draw_cards(dealer_cards, deck):
@@ -193,14 +172,30 @@ def dealer_draw_cards(dealer_cards, deck):
         for card_idx in range(len(dealer_cards[status])):
             dealer_card_sum += Card.RANK_TO_NUMBER[str(dealer_cards[status][card_idx]).split("-")[1]]
 
-    if dealer_card_sum <17:
+    if dealer_card_sum < 17:
         card_picked = deck.pick_card(1)
         dealer_cards["hidden"].append(card_picked[0])
     else:
         return dealer_cards
 
-
     return dealer_cards
+
+
+def check_who_wins(user_cards, dealer_cards):
+    """
+    Compare the cards sum of user and dealer, and bigger number will win
+
+    Args:
+        user_cards:
+        dealer_cards:
+
+
+    Returns:
+        None
+    """
+    # TODO: Please write a logic
+
+    return None
 
 if __name__ == "__main__":
     start_game()
