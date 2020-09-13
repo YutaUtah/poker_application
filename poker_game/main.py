@@ -191,6 +191,18 @@ def check_who_wins(user_cards, dealer_cards):
     return None
 
 def output_result(user_cards, dealer_cards, comment):
+    """
+    Output the result in result.csv.
+    If no csv file is indicated, create one
+
+    Args:
+        user_cards:
+        dealer_cards:
+        comment:
+
+    Returns:
+        None
+    """
     path = './result.csv'
     user_sum = check_the_sum(user_cards)
     dealer_sum = check_the_sum(dealer_cards)
