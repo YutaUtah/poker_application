@@ -1,8 +1,6 @@
 from poker_game.deck import Deck
 from poker_game.card import Card
 
-import sys
-
 def start_game():
     """
     Start a poker game.
@@ -25,8 +23,6 @@ def start_game():
     # Initial setting: both user and dealer draw 2 cards
     user_cards = deck.pick_card(2)
     dealer_cards = deck.pick_card(2)
-    global game_over
-    game_over = False
 
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
@@ -40,6 +36,8 @@ def start_game():
     # User could choose whether or not they pick additional card
     user_cards = user_decide_draw_cards(user_cards, deck)
     if check_the_sum(user_cards) > 21:
+        comment = "Dealer wins"
+        output_result(user_cards, dealer_cards, comment)
         return None
     # Dealer needs to pick additional card if their remaining sum is under 17
     dealer_cards = dealer_draw_cards(dealer_cards, deck)
@@ -94,7 +92,7 @@ def user_decide_draw_cards(game_card_user, deck):
         draw_or_not = input("You have 2 cards {}. Do you want to draw 1 more card? [y/n] \n"
                             .format(', '.join(str(x) for x in game_card_user["displayed"])))
 
-        if draw_or_not == 'y':
+        if draw_or_not.lower() == 'y':
             user_next_card = deck.pick_card(1)
             game_card_user["displayed"].append(user_next_card[0])
             print("your current cards are {}".format(', '.join(str(x) for x in game_card_user["displayed"])))
@@ -102,7 +100,7 @@ def user_decide_draw_cards(game_card_user, deck):
                 print("Your cards is over 21, You lose!")
                 break
             pass
-        elif draw_or_not == 'n':
+        elif draw_or_not.lower() == 'n':
             break
         else:
             print("Please input appropriate answer!")
@@ -171,17 +169,34 @@ def check_who_wins(user_cards, dealer_cards):
     """
     if check_the_sum(dealer_cards) > 21:
         print("You win {}!".format(', '.join(str(x) for x in user_cards["displayed"])))
+        comment = "You win"
+        output_result(user_cards, dealer_cards, comment)
     elif check_the_sum(user_cards) > check_the_sum(dealer_cards):
         print("You win {}!".format(', '.join(str(x) for x in user_cards["displayed"])))
+        comment = "You win"
+        output_result(user_cards, dealer_cards, comment)
     elif check_the_sum(user_cards) < check_the_sum(dealer_cards):
         print("Dealer wins {}!".format(', '.join(str(x) for status in ("hidden", "displayed")
                                                  for x in dealer_cards[status])))
+        comment = "Dealer wins"
+        output_result(user_cards, dealer_cards, comment)
     elif check_the_sum(user_cards) == check_the_sum(dealer_cards):
-        print("You guys tied {} {}!".format(', '.join(str(x) for x in user_cards["displayed"]),
+        print("You guys tied! Yours: {} Theirs: {}".format(', '.join(str(x) for x in user_cards["displayed"]),
                                             ', '.join(str(x) for status in ("hidden", "displayed")
                                                       for x in dealer_cards[status])))
+        comment = "Tied"
+        output_result(user_cards, dealer_cards, comment)
+
 
     return None
+
+def output_result(user_cards, dealer_cards, comment):
+    path = './result.csv'
+    user_sum = check_the_sum(user_cards)
+    dealer_sum = check_the_sum(dealer_cards)
+
+    with open(path, mode="a+") as f:
+        f.write(str(user_sum) + " " + str(dealer_sum) + " " + comment + "\n")
 
 if __name__ == "__main__":
     game_counter = 1
@@ -189,7 +204,7 @@ if __name__ == "__main__":
     while True:
         start_game()
         user_decision = input("\nDo you want to continue? [y/n]\n")
-        if user_decision == 'n':
+        if user_decision.lower() == 'n':
             print("\nThank you for playing our BlackJack!!")
             break
         game_counter += 1
