@@ -32,7 +32,7 @@ def start_game():
     # user_cards = {"displayed":[6, 11], "hidden": []}
     # dealer_cards = {"displayed":[8], "hidden": [12]}
 
-    display_cards(user_cards, dealer_cards)
+    display_cards(user_cards, dealer_cards, deck)
     user_cards = user_decide_draw_cards(user_cards, deck)
     if check_the_sum(user_cards) > 21:
         comment = "Dealer wins"
@@ -44,7 +44,7 @@ def start_game():
 
     return None
 
-def display_cards(user_cards, dealer_cards):
+def display_cards(user_cards, dealer_cards, deck):
     """
     Draw two cards for users and dealers from deck object.
 
@@ -73,9 +73,9 @@ def display_cards(user_cards, dealer_cards):
     dealer_cards["hidden"].append(deck.draw_a_card())
 
     print("Your cards:")
-    print(*game_card_user["displayed"], sep=' ')
+    print(*user_cards["displayed"], sep=' ')
     print("Dealer's displayed card: ")
-    print(*game_card_dealer["displayed"], sep=' ')
+    print(*dealer_cards["displayed"], sep=' ')
 
     return game_card_user, game_card_dealer
 
@@ -152,7 +152,7 @@ def dealer_draw_cards(dealer_cards, deck):
 
     for status in ("hidden", "displayed"):
         for card_idx in range(len(dealer_cards[status])):
-            dealer_card_sum += Card.RANK_TO_NUMBER[str(dealer_cards[status][card_idx]).split("-")[1]]
+            dealer_card_sum += Card.RANK_TO_NUMBER[dealer_cards[status][card_idx].split("-")[1]]
 
     if dealer_card_sum < 17:
         card_picked = deck.pick_card(1)

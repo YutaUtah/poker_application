@@ -30,11 +30,8 @@ class Deck(object):
         :return: designated cards we drew, should return the list
         """
         self.draw_card = []
-        if draw_num == 0:
-            return self.all_cards
-        else:
-            for draw in range(draw_num):
-                self.draw_card.append(self.all_cards.pop())
+        for draw in range(draw_num):
+            self.draw_card.append(self.all_cards.pop())
 
 
         return self.draw_card
