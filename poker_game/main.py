@@ -22,17 +22,23 @@ def start_game():
     # Instantiate the Deck object from deck.py
     deck = Deck()
     # Initial setting: both user and dealer draw 2 cards
-    user_cards = deck.pick_card(2)
-    dealer_cards = deck.pick_card(2)
+
+    user_cards = {"displayed": [], "hidden": []}
+    dealer_cards = {"displayed": [], "hidden": []}
+
+    user_cards["displayed"] = deck.pick_card(2)
+    dealer_cards["displayed"] = deck.pick_card(1)
+    dealer_cards["hidden"] = deck.pick_card(1)
 
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
+
 
     # Examples:
     # user_cards = {"displayed":[6, 11], "hidden": []}
     # dealer_cards = {"displayed":[8], "hidden": [12]}
 
-    display_cards(user_cards, dealer_cards, deck)
+    display_cards(user_cards, dealer_cards)
     user_cards = user_decide_draw_cards(user_cards, deck)
     if check_the_sum(user_cards) > 21:
         comment = "Dealer wins"
@@ -44,7 +50,7 @@ def start_game():
 
     return None
 
-def display_cards(user_cards, dealer_cards, deck):
+def display_cards(user_cards, dealer_cards):
     """
     Draw two cards for users and dealers from deck object.
 
@@ -63,21 +69,14 @@ def display_cards(user_cards, dealer_cards, deck):
         user_cards, dealer_cards
     """
 
-    #TODO: Please write a logic
-    user_cards = {"displayed":[], "hidden": []}
-    dealer_cards = {"displayed": [], "hidden": []}
-
-    user_cards["displayed"].append(deck.draw_a_card())
-    dealer_cards["displayed"].append(deck.draw_a_card())
-    user_cards["displayed"].append(deck.draw_a_card())
-    dealer_cards["hidden"].append(deck.draw_a_card())
-
     print("Your cards:")
-    print(*user_cards["displayed"], sep=' ')
+    for card in user_cards["displayed"]:
+        print(card)
+    print(user_cards["displayed"], sep=' ')
     print("Dealer's displayed card: ")
-    print(*dealer_cards["displayed"], sep=' ')
-
-    return game_card_user, game_card_dealer
+    for card in dealer_cards["displayed"]:
+        print(str(card))
+    return None
 
 
 def user_decide_draw_cards(game_card_user, deck):
@@ -101,6 +100,7 @@ def user_decide_draw_cards(game_card_user, deck):
 
         if draw_or_not.lower() == 'y':
             user_next_card = deck.pick_card(1)
+            print(user_next_card)
             game_card_user["displayed"].append(user_next_card[0])
             print("your current cards are {}".format(', '.join(str(x) for x in game_card_user["displayed"])))
             if check_the_sum(game_card_user) > 21:
@@ -128,7 +128,7 @@ def check_the_sum(player_cards):
     # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
     cards_sum = 0
-
+    print(type(player_cards['displayed'][0]))
     for status in ("hidden", "displayed"):
         for card_idx in range(len(player_cards[status])):
             cards_sum += Card.RANK_TO_NUMBER[str(player_cards[status][card_idx]).split("-")[1]]

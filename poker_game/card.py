@@ -24,6 +24,7 @@ class Card(SetOfCard):
         self.number = card_number
         self.rank = self.NUMBER_TO_RANK[self.number]
         self.pair = f"{self.MARKS[self.mark]}-{self.rank}"
+        self.RANK_TO_NUMBER = SetOfCard.RANK_TO_NUMBER
 
     def __repr__(self):
         """

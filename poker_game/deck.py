@@ -29,12 +29,12 @@ class Deck(object):
         :param draw_num:
         :return: designated cards we drew, should return the list
         """
-        self.draw_card = []
+        draw_card = []
         for draw in range(draw_num):
-            self.draw_card.append(self.all_cards.pop())
+            draw_card.append(self.all_cards.pop())
 
 
-        return self.draw_card
+        return draw_card
 
 
 """
