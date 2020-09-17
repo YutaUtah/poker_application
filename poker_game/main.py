@@ -128,7 +128,17 @@ def check_the_sum(player_cards):
     # TODO: Please write a logic (what happens if i call number_to_rank outside of this function)
 
     cards_sum = 0
-    print(type(player_cards['displayed'][0]))
+
+    """
+    for status_cards in player_cards.items: 
+    for each_card in status_cards: 
+    cards_sum += Card.RANK_TO_NUMBER[each_card.split("-")[1]] 
+    
+    for status in ("hidden", "displayed"): 
+    for card_idx in range(len(player_cards[status])): 
+    cards_sum += Card.RANK_TO_NUMBER[str(player_cards[status][card_idx]).split("-")[1]]
+    """
+
     for status in ("hidden", "displayed"):
         for card_idx in range(len(player_cards[status])):
             cards_sum += Card.RANK_TO_NUMBER[str(player_cards[status][card_idx]).split("-")[1]]
