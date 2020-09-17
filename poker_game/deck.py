@@ -19,7 +19,7 @@ class Deck(object):
         for deck in range(self.deck_num):
             for mark in range(0,len(Card.MARKS)):
                 for value in Card.NUMBERS:
-                    self.all_cards.append(Card(mark, value))
+                    self.all_cards.append(Card(mark, value).pair)
 
         shuffle(self.all_cards)
 
@@ -44,8 +44,6 @@ card_left is the decks - draw_card
 
 
 
-if __name__ == "__main__":
-    deck = Deck(2)
-    # print(deck.pick_card(5))
+
 
 
