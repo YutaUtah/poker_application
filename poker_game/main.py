@@ -1,6 +1,7 @@
 from poker_game.deck import Deck
 from poker_game.card import Card
 
+
 def start_game():
     """
     Start a poker game.
@@ -27,13 +28,11 @@ def start_game():
     # todo: without return value on this function, how does it work?
     # display_cards(user_cards, dealer_cards)
 
-    """
-    Examples:
-    user_cards = {"displayed":[6, 11], "hidden": []}
-    dealer_cards = {"displayed":[8], "hidden": [12]}
-    """
-    user_cards, dealer_cards = display_cards(user_cards, dealer_cards)
-    # User could choose whether or not they pick additional card
+    # Examples:
+    # user_cards = {"displayed":[6, 11], "hidden": []}
+    # dealer_cards = {"displayed":[8], "hidden": [12]}
+
+    display_cards(user_cards, dealer_cards)
     user_cards = user_decide_draw_cards(user_cards, deck)
     if check_the_sum(user_cards) > 21:
         comment = "Dealer wins"
@@ -47,8 +46,14 @@ def start_game():
 
 def display_cards(user_cards, dealer_cards):
     """
-    Display the cards in "displayed" and "hidden"
-    Dealer is only able to display 1 card
+    Draw two cards for users and dealers from deck object.
+
+    Create two empty dictionarys with a key displayed and hidden,
+    call a function draw_a_card() from Deck objects,
+    assign two cards to displayed in user_cards,
+    assign one card to displayed and one card to hidden in dealer_cards,
+    return these dictionaries.
+
 
     Args:
         user_cards:
@@ -57,13 +62,15 @@ def display_cards(user_cards, dealer_cards):
     Returns:
         user_cards, dealer_cards
     """
-    # TODO: Please write a logic
-    keyDict_user = {"displayed", "hidden"}
-    keyDict_dealer = {"displayed", "hidden"}
-    game_card_user = dict([(key, []) for key in keyDict_user])
-    game_card_dealer = dict([(key, []) for key in keyDict_dealer])
-    game_card_user["displayed"] = user_cards
-    game_card_dealer["displayed"], game_card_dealer["hidden"] = [dealer_cards[0]], [dealer_cards[1]]
+
+    #TODO: Please write a logic
+    user_cards = {"displayed":[], "hidden": []}
+    dealer_cards = {"displayed": [], "hidden": []}
+
+    user_cards["displayed"].append(deck.draw_a_card())
+    dealer_cards["displayed"].append(deck.draw_a_card())
+    user_cards["displayed"].append(deck.draw_a_card())
+    dealer_cards["hidden"].append(deck.draw_a_card())
 
     print("Your cards:")
     print(*game_card_user["displayed"], sep=' ')
