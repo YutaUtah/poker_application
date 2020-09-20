@@ -25,7 +25,7 @@ class Deck(object):
 
     def pick_card(self, draw_num):
         """
-
+        Pick a card from a deck based on draw_num
         :param draw_num:
         :return: designated cards we drew, should return the list
         """
